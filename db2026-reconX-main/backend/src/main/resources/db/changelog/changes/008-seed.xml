@@ -17,7 +17,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
 
-    <changeSet id="008-seed-counterparties" author="trainer">
+    <changeSet id="008-seed-counterparties" author="trainer" context="dev,test">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">SELECT COUNT(*) from counterparties</sqlCheck>
         </preConditions>
@@ -33,7 +33,7 @@
         </rollback>
     </changeSet>
 
-    <changeSet id="008-seed-instruments" author="trainer">
+    <changeSet id="008-seed-instruments" author="trainer" context="dev,test">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">SELECT COUNT(*) from instruments</sqlCheck>
         </preConditions>
@@ -51,7 +51,7 @@
         </rollback>
     </changeSet>
 
-    <changeSet id="008-seed-users" author="trainer">
+    <changeSet id="008-seed-users" author="trainer" context="dev,test">
         <!-- Real BCrypt hashes (cost=10) for admin123 / trader123 / viewer123 / recon123.
              Generated via: htpasswd -bnBC 10 "" <pw> | tr -d ':\n'
              Spring Security's BCryptPasswordEncoder accepts both $2a$ and $2y$ prefixes. -->
