@@ -74,4 +74,14 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="008-seed-trades" author="trainer" context="dev,test">
+        <sqlFile
+                path="data/trades.sql"
+                relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="008-seed-trades-and-breaks" author="trainer" context="dev,test">
+        <sqlFile
+                path="data/trades.sql"
+                relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
