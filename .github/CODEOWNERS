@@ -1,0 +1,26 @@
+# TICKET-ADV001 — Code owners
+#
+# Routes PR reviews to the right lead by path. GitHub only honours a
+# CODEOWNERS file at the repo root, in .github/, or in docs/ — this lives at
+# .github/ so it applies to the whole repository (the ReconX project is nested
+# under db2026-reconX-main/, and the un-anchored patterns below match those
+# directories wherever they appear in the tree).
+#
+# NOTE: replace the *-lead-handle placeholders with real GitHub usernames /
+# team slugs before relying on this for review routing — unknown handles are
+# ignored by GitHub.
+
+# Default owner for everything not matched below.
+*               @popica07
+
+# Backend (Spring Boot / Java) — backend lead + team lead.
+backend/        @popica07 @backend-lead-handle
+
+# Frontend (React SPA) — frontend lead + team lead.
+frontend/       @popica07 @frontend-lead-handle
+
+# Database (Liquibase changelogs, ERD, SQL) — db lead + team lead.
+db/             @popica07 @db-lead-handle
+
+# CI / repo config changes always go past the team lead.
+.github/        @popica07

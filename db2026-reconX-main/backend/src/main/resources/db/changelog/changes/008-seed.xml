@@ -83,14 +83,21 @@
         </rollback>
     </changeSet>
 
-    <changeSet id="008-seed-trades" author="trainer" context="dev,test">
-        <sqlFile
-                path="data/trades.sql"
-                relativeToChangelogFile="true"/>
-    </changeSet>
+    <!-- Loads 500 trades + recon_breaks + settlements from data/trades.sql.
+         The COUNT(*)=0 precondition makes re-runs a no-op (MARK_RAN) so the
+         app can restart without doubling the seed. -->
     <changeSet id="008-seed-trades-and-breaks" author="trainer" context="dev,test">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM trades</sqlCheck>
+        </preConditions>
         <sqlFile
                 path="data/trades.sql"
                 relativeToChangelogFile="true"/>
+        <rollback>
+            <!-- FK-safe order: children before parents. -->
+            <sql>DELETE FROM settlements;</sql>
+            <sql>DELETE FROM recon_breaks;</sql>
+            <sql>DELETE FROM trades;</sql>
+        </rollback>
     </changeSet>
 </databaseChangeLog>
